@@ -15,17 +15,16 @@ return new class extends Migration
             $table->id();
 
             $table->foreignId('post_id')
-                ->constrained('posts')
-                ->cascadeOnDelete();
+                ->constrained('posts');
+            
 
             $table->foreignId('user_id')
-                ->constrained('users')
-                ->cascadeOnDelete();
+                ->constrained('users');
             
             $table->foreignId('parent_id')
                 ->nullable()
                 ->constrained('comments')
-                ->cascadeOnDelete();
+                ->nullOnDelete();
             
             $table->text('comment_text');
 
@@ -35,6 +34,7 @@ return new class extends Migration
                 'hidden',
             ])->default('pending');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

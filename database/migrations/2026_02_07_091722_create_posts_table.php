@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
 
-            $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
+            $table->foreignId('user_id')->constrained('users');
             $table->foreignId('category_id')->constrained('categories')->restrictOnDelete();
 
             $table->string('title');
@@ -34,6 +34,7 @@ return new class extends Migration
             $table->timestamp('published_at')->nullable();
 
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
