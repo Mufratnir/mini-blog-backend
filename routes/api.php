@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ForgotPasswordController;
 
 
 /*
@@ -16,8 +17,8 @@ Route::prefix('auth')->group(function () {
     // Public
     Route::post('/register', [AuthController::class, 'register']);
     Route::post('/login', [AuthController::class, 'login']);
-    Route::post('/forgot-password', [AuthController::class, 'forgotPassword']);
-    Route::post('/reset-password', [AuthController::class, 'resetPassword']);
+    Route::post('/forgot-password', [ForgotPasswordController::class, 'forgot']);
+    Route::post('/reset-password', [ForgotPasswordController::class, 'reset']);
     Route::get('/verify-email/{token}', [AuthController::class, 'verifyEmail']);
 
     // Protected
