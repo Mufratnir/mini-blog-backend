@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use Dom\Comment;
+use App\Models\Comment;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -21,6 +21,7 @@ class Post extends Model
         'cover_image',
         'status',
         'published_at',
+        'reject_reason',
     ];
 
     protected $casts = [

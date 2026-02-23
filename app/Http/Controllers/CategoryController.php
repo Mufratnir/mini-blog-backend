@@ -9,14 +9,24 @@ use Illuminate\Support\Str;
 class CategoryController extends Controller
 {
     /* ================= LIST ================= */
-    public function index()
+    public function index(Request $request)
     {
-        $categories = Category::latest()->get();
-        return response()->json([
+        
+        $search = request()->query('search');
+        $limit = (int) request()->query('limit', 20);
+        $offset = (int) request()->query('offset', 0);
+        $query = Category::select('id', 'name', 'status', 'slug');
+        if ($search) {
+            $query->where('name', 'like', '%' . $search . '%');
+        }
+        $total = $query->count();
+        $categories = $query->limit($limit)->offset($offset)->get();
+        return response ()->json([
             'status' => true,
             'message' => 'Category List Retrieved Successfully',
-            'data' => $categories
-        ]);
+            'total' => $total,
+            'data' => $categories,
+        ], 200);
     }
 
     /* ================= STORE ================= */
